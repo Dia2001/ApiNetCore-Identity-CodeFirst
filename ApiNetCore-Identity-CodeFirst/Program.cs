@@ -1,3 +1,6 @@
+using ApiNetCore_Identity_CodeFirst.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -6,6 +9,13 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddCors(options => options.AddDefaultPolicy(policy => policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()));
+
+builder.Services.AddDbContext<BookStoreContext>(options => {
+    options.UseSqlServer(builder.Configuration.GetConnectionString("BookStore"));
+});
+
 
 var app = builder.Build();
 
@@ -23,3 +33,7 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+// Add - Migration DbInit
+// update-database
+// The versions of Entity Framework must match, otherwise errors will occur.
