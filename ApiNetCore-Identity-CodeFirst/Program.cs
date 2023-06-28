@@ -1,4 +1,5 @@
 using ApiNetCore_Identity_CodeFirst.Data;
+using ApiNetCore_Identity_CodeFirst.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,6 +17,10 @@ builder.Services.AddDbContext<BookStoreContext>(options => {
     options.UseSqlServer(builder.Configuration.GetConnectionString("BookStore"));
 });
 
+builder.Services.AddAutoMapper(typeof(Program));
+
+// Life cycle DI: AddSingleton(), AddTransient(), AddScoped()
+builder.Services.AddScoped<IBookRepository, BookRepository>();
 
 var app = builder.Build();
 
@@ -37,3 +42,4 @@ app.Run();
 // Add - Migration DbInit
 // update-database
 // The versions of Entity Framework must match, otherwise errors will occur.
+// AutoMapper .net Core 6
