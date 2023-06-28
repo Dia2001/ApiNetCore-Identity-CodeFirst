@@ -1,10 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace ApiNetCore_Identity_CodeFirst.Data
 {
-    public class BookStoreContext : DbContext
+    public class BookStoreContext : IdentityDbContext<ApplicationUser>
     {
-        public BookStoreContext(DbContextOptions<BookStoreContext> opt) : base(opt)
+        public BookStoreContext(DbContextOptions<BookStoreContext> option) : base(option)
         {
 
         }

@@ -1,5 +1,6 @@
 ﻿using ApiNetCore_Identity_CodeFirst.Models;
 using ApiNetCore_Identity_CodeFirst.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -37,6 +38,7 @@ namespace ApiNetCore_Identity_CodeFirst.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> AddNewBook(BookModel model)
         {
             try
@@ -52,6 +54,7 @@ namespace ApiNetCore_Identity_CodeFirst.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize]
         public async Task<IActionResult> UpdateBook(int id, [FromBody] BookModel model)
         {
             if (id != model.Id)
@@ -63,6 +66,7 @@ namespace ApiNetCore_Identity_CodeFirst.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize]
         public async Task<IActionResult> DeleteBook([FromRoute] int id)
         {
             await _bookRepo.DeleteBookAsync(id);
