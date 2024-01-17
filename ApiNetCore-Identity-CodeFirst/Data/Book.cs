@@ -15,5 +15,7 @@ namespace ApiNetCore_Identity_CodeFirst.Data
         public double Price { get; set; }
         [Range(0, 100)]
         public int Quantity { get; set; }
+        [NotMapped]
+        public AuthorE AuthorE { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using ApiNetCore_Identity_CodeFirst.Data;
+using System.ComponentModel.DataAnnotations;
 
 namespace ApiNetCore_Identity_CodeFirst.Models
 {
@@ -13,6 +14,6 @@ namespace ApiNetCore_Identity_CodeFirst.Models
         public double Price { get; set; }
         [Range(0, 100)]
         public int Quantity { get; set; }
-
+        public Author Author { get; set; }
     }
 }

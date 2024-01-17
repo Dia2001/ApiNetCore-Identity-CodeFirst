@@ -1,4 +1,6 @@
 ﻿using ApiNetCore_Identity_CodeFirst.Data;
+using ApiNetCore_Identity_CodeFirst.Models;
+using ApiNetCore_Identity_CodeFirst.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,6 +12,7 @@ namespace ApiNetCore_Identity_CodeFirst.Controllers
     public class BooksController : ControllerBase
     {
         private readonly BookStoreContext _context;
+        private readonly IBookRepository _bookRepo;
 
         public BooksController(BookStoreContext context)
         {
@@ -25,9 +28,9 @@ namespace ApiNetCore_Identity_CodeFirst.Controllers
 
         // GET: api/Books/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Book>> GetBook(int id)
+        public async Task<ActionResult<BookModel>> GetBook(int id)
         {
-            var book = await _context.Books.FindAsync(id);
+            var book = await _bookRepo.GetBookAsync(id);
 
             if (book == null)
             {
