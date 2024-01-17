@@ -45,6 +45,13 @@ namespace ApiNetCore_Identity_CodeFirst.Repositories
         public async Task<BookModel> GetBookAsync(int id)
         {
             var book = await _context.Books!.FindAsync(id);
+            AuthorE authorE = new AuthorE
+            {
+                emailE = "emailE",
+                nameE = "nameE"
+            };
+            if (book == null) return null;
+            book.AuthorE = authorE;
             return _mapper.Map<BookModel>(book);
         }
 
